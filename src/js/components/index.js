@@ -1,6 +1,8 @@
 // import { exampleComponent } from "./exampleComponent.js";
+import { sliders } from "./sliders";
 
 export const componentsInit = (page = document) => {
+  sliders();
   console.log("components init");
 };
 
