@@ -1,5 +1,4 @@
 import Splide from "@splidejs/splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 
 import "@splidejs/splide/css/core";
 import { unwrapElements } from "../utils/unwrap";
@@ -12,9 +11,7 @@ const splideConfig = {
     easing: ease,
     pagination: true,
     arrows: false,
-    autoScroll: {
-      speed: 5,
-    },
+    // autoplay: true,
     classes: {
       pagination: "splide__pagination gallery_numbering-wrapper",
       page: "splide__pagination__page gallery_image-counter",
@@ -22,22 +19,31 @@ const splideConfig = {
   },
 };
 
-const sliders = () => {
+const sliders = (page = document) => {
   unwrapElements();
 
-  let sliders = document.querySelectorAll(".splide");
+  let sliders = page.querySelectorAll(".splide");
 
   if (!sliders) return;
 
   sliders.forEach((slider) => {
     if (!slider.querySelector(".splide__track")) return;
     if (!slider.querySelector(".splide__list")) return;
+    if (slider.classList.contains("is-initialized")) return;
 
     let config = splideConfig.default;
-    let mountConfig = { AutoScroll };
+    let mountConfig = {};
 
     let splide = new Splide(slider, config);
     splide.mount(mountConfig);
+
+    // hide static placeholders (used for easier styling in Webflow)
+    let numbering = page.querySelectorAll(".gallery_numbering-wrapper");
+    numbering.forEach((element) => {
+      if (!element.classList.contains("splide__pagination")) {
+        element.style.display = "none";
+      }
+    });
   });
 };
 

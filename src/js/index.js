@@ -9,6 +9,7 @@ import {
   aboutPrep,
   aboutEnter,
 } from "./pages/about.js";
+import { componentsInit } from "./components/index.js";
 
 globalInit();
 console.log("Hello, Vite!");
@@ -19,9 +20,11 @@ barba.init({
     {
       name: "default-transition",
       async once(data) {
+        componentsInit(data.next.container);
         await defaultEnter(data.next.container);
       },
       async after(data) {
+        componentsInit(data.next.container);
         await defaultEnter(data.next.container);
       },
       async leave() {
@@ -31,22 +34,12 @@ barba.init({
     {
       name: "about-transition",
       to: { namespace: ["about"] },
-      //   async once(data) {
-      //     console.log("about");
-      //     aboutPrep(data.next.container);
-      //     await defaultEnter();
-      //     aboutInit(data.next.container);
-      //   },
-      //   async after(data) {
-      //     console.log("about");
-      //     aboutPrep(data.next.container);
-      //     await defaultEnter();
-      //     aboutInit(data.next.container);
-      //   },
       async once(data) {
+        componentsInit(data.next.container);
         aboutEnter(data.current.container);
       },
       async after(data) {
+        componentsInit(data.next.container);
         aboutEnter(data.next.container);
       },
       async leave(data) {

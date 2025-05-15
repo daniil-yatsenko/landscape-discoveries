@@ -2,7 +2,7 @@
 import { sliders } from "./sliders";
 
 export const componentsInit = (page = document) => {
-  sliders();
+  sliders(page);
   console.log("components init");
 };
 
