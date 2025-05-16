@@ -3,8 +3,9 @@ import barba from "@barba/core";
 import { gsap } from "gsap";
 import { defaultEnter, defaultLeave } from "./global/transitions.js";
 import { aboutEnter } from "./pages/about.js";
-import { componentsInit } from "./components/index.js";
 import { homeEnter } from "./pages/home.js";
+import { servicesEnter } from "./pages/services.js";
+import { componentsInit } from "./components/index.js";
 
 globalInit();
 console.log("Hello, Vite!");
@@ -49,6 +50,20 @@ barba.init({
       async after(data) {
         componentsInit(data.next.container);
         homeEnter(data.next.container);
+      },
+      async leave(data) {
+        await defaultLeave();
+      },
+    },
+    {
+      name: "services-transition",
+      to: { namespace: ["services"] },
+      async once(data) {
+        servicesEnter(data.next.container);
+      },
+      async after(data) {
+        componentsInit(data.next.container);
+        servicesEnter(data.next.container);
       },
       async leave(data) {
         await defaultLeave();

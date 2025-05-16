@@ -20,7 +20,7 @@ const homeEnter = (page = document) => {
   tl.set(h2s, { y: "2rem" });
   tl.set(secondCells, { y: "1rem", opacity: 0 });
   tl.set(imageWrappers, { overflow: "hidden" });
-  tl.set(images, { y: "100%" });
+  tl.set(images, { y: "102%" });
 
   tl.to(overlay, {
     opacity: 0,
