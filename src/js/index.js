@@ -3,9 +3,10 @@ import barba from "@barba/core";
 import { gsap } from "gsap";
 import { defaultEnter, defaultLeave } from "./global/transitions.js";
 import { aboutEnter } from "./pages/about.js";
-import { homeEnter } from "./pages/home.js";
+import { homeEnter, homeHeroEnter } from "./pages/home.js";
 import { servicesEnter } from "./pages/services.js";
 import { componentsInit } from "./components/index.js";
+import { activeLink } from "./components/navbar.js";
 
 globalInit();
 console.log("Hello, Vite!");
@@ -56,6 +57,20 @@ barba.init({
       },
     },
     {
+      name: "home-hero-transition",
+      to: { namespace: ["home-hero"] },
+      async once(data) {
+        homeHeroEnter(data.next.container);
+      },
+      async after(data) {
+        componentsInit(data.next.container);
+        homeHeroEnter(data.next.container);
+      },
+      async leave(data) {
+        await defaultLeave();
+      },
+    },
+    {
       name: "services-transition",
       to: { namespace: ["services"] },
       async once(data) {
@@ -70,4 +85,14 @@ barba.init({
       },
     },
   ],
+});
+
+barba.hooks.once((data) => {
+  activeLink(data);
+  return;
+});
+
+barba.hooks.after((data) => {
+  activeLink(data);
+  return;
 });
