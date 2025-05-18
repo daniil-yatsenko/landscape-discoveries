@@ -1,7 +1,5 @@
 import { gsap } from "gsap";
 
-const homeInit = () => {};
-
 const homeEnter = (page = document) => {
   console.log("Home enter");
 
@@ -48,4 +46,44 @@ const homeEnter = (page = document) => {
   });
 };
 
-export { homeEnter };
+const homeHeroEnter = (page = document) => {
+  const overlay = document.querySelector(".overlay");
+  const hero = page.querySelector(".section_hero");
+  const navLinks = document.querySelectorAll(".navbar_navlink");
+
+  let tl = gsap.timeline();
+
+  tl.set(hero, { opacity: 0, scale: 1.03 });
+  tl.set(navLinks, { opacity: 0, y: "0.5rem" });
+  tl.to(overlay, {
+    opacity: 0,
+    display: "none",
+    duration: 0.5,
+    ease: "power2.inOut",
+  });
+  tl.to(hero, {
+    opacity: 1,
+    duration: 0.4,
+    ease: "power2.inOut",
+    delay: 0.1,
+  });
+  tl.to(
+    hero,
+    {
+      scale: 1,
+      duration: 0.8,
+      ease: "power2.out",
+    },
+    "<"
+  );
+  tl.to(navLinks, {
+    opacity: 1,
+    y: "0rem",
+    duration: 0.3,
+    stagger: 0.1,
+    ease: "power2.inOut",
+    delay: -0.6,
+  });
+};
+
+export { homeEnter, homeHeroEnter };
