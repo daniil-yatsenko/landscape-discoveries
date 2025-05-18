@@ -1,5 +1,6 @@
 import Splide from "@splidejs/splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
+// import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
+import { gsap } from "gsap";
 
 import "@splidejs/splide/css/core";
 import { unwrapElements } from "../utils/unwrap";
@@ -56,6 +57,16 @@ const sliders = (page = document) => {
       if (!element.classList.contains("splide__pagination")) {
         element.style.display = "none";
       }
+    });
+
+    // workaround for safari bug ignoring aspect-ratio css
+    let imageWrappers = slider.querySelectorAll(".splide_image-wrapper");
+    imageWrappers.forEach((wrapper) => {
+      const width = wrapper.offsetWidth;
+      const height = (width * 2) / 3;
+      console.log(height);
+
+      gsap.set(wrapper, { height: height });
     });
   });
 };
