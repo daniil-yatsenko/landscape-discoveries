@@ -7,7 +7,8 @@ const activeLink = (data) => {
 
   // first word of link's text content
   const namesToHref = {
-    Home: ["/", "/home-v2"],
+    Home: ["/"],
+    HomeV2: ["/home-v2"],
     About: ["/about"],
     Services: ["/services-processes"],
     Gallery: ["/gallery"],

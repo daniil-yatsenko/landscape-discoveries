@@ -1,4 +1,4 @@
-import { globalInit } from "./global/globalInit.js";
+import { globalInit, lenisMain } from "./global/globalInit.js";
 import barba from "@barba/core";
 import { gsap } from "gsap";
 import { defaultEnter, defaultLeave } from "./global/transitions.js";
@@ -7,6 +7,7 @@ import { homeEnter, homeHeroEnter } from "./pages/home.js";
 import { servicesEnter } from "./pages/services.js";
 import { componentsInit } from "./components/index.js";
 import { activeLink } from "./components/navbar.js";
+import { galleryEnter } from "./pages/gallery.js";
 
 globalInit();
 console.log("Hello, Vite!");
@@ -84,6 +85,20 @@ barba.init({
         await defaultLeave();
       },
     },
+    {
+      name: "gallery-transition",
+      to: { namespace: ["gallery"] },
+      async once(data) {
+        galleryEnter(data.next.container);
+      },
+      async after(data) {
+        componentsInit(data.next.container);
+        galleryEnter(data.next.container);
+      },
+      async leave(data) {
+        await defaultLeave();
+      },
+    },
   ],
 });
 
@@ -94,5 +109,6 @@ barba.hooks.once((data) => {
 
 barba.hooks.after((data) => {
   activeLink(data);
+  lenisMain.resize();
   return;
 });
