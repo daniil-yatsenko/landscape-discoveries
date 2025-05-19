@@ -12,6 +12,7 @@ const splideConfig = {
     easing: ease,
     pagination: true,
     arrows: false,
+    type: "loop",
     // autoplay: true,
     classes: {
       pagination: "splide__pagination gallery_numbering-wrapper",
@@ -67,6 +68,12 @@ const sliders = (page = document) => {
       console.log(height);
 
       gsap.set(wrapper, { height: height });
+    });
+
+    slider.querySelectorAll(".splide__slide").forEach((slide) => {
+      slide.addEventListener("click", () => {
+        splide.go(">"); // Go to next slide
+      });
     });
   });
 };
