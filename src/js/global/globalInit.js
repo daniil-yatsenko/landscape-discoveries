@@ -9,7 +9,6 @@ const globalInit = async () => {
   //   navbar.init();
   //   componentsInit(document);
   componentsInit();
-  console.log("globalInit");
 };
 
 export { globalInit };

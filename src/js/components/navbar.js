@@ -21,7 +21,6 @@ const activeLink = (data) => {
     const pathname = window.location.pathname;
 
     navLink.classList.remove("w--current");
-    console.log(linkName, href);
 
     if (namesToHref[linkName]?.includes(href) && href === pathname) {
       navLink.classList.add("w--current");

@@ -44,10 +44,9 @@ const sliders = (page = document) => {
     let config = splideConfig.default;
     let mountConfig = {};
 
-    if (slider.classList.contains("is-services")) {
-      config = splideConfig.services;
-      // mountConfig = { AutoScroll };
-    }
+    // if (slider.classList.contains("is-services")) {
+    //   config = splideConfig.services;
+    // }
 
     let splide = new Splide(slider, config);
     splide.mount(mountConfig);
@@ -63,11 +62,15 @@ const sliders = (page = document) => {
     // workaround for safari bug ignoring aspect-ratio css
     let imageWrappers = slider.querySelectorAll(".splide_image-wrapper");
     imageWrappers.forEach((wrapper) => {
-      const width = wrapper.offsetWidth;
-      const height = (width * 2) / 3;
-      console.log(height);
+      let width = wrapper.offsetWidth;
+      let height = (width * 2) / 3;
 
       gsap.set(wrapper, { height: height });
+      window.addEventListener("resize", () => {
+        width = wrapper.offsetWidth;
+        height = (width * 2) / 3;
+        gsap.set(wrapper, { height: height });
+      });
     });
 
     slider.querySelectorAll(".splide__slide").forEach((slide) => {

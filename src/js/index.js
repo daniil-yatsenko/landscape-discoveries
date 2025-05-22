@@ -10,7 +10,6 @@ import { activeLink } from "./components/navbar.js";
 import { galleryEnter } from "./pages/gallery.js";
 
 globalInit();
-console.log("Hello, Vite!");
 
 barba.init({
   views: [],
@@ -46,7 +45,6 @@ barba.init({
       name: "home-transition",
       to: { namespace: ["home"] },
       async once(data) {
-        console.log("home transition");
         homeEnter(data.next.container);
       },
       async after(data) {
@@ -109,6 +107,5 @@ barba.hooks.once((data) => {
 
 barba.hooks.after((data) => {
   activeLink(data);
-  lenisMain.resize();
   return;
 });
