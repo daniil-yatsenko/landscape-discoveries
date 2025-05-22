@@ -1,8 +1,7 @@
 import { gsap } from "gsap";
+import { lenisMain } from "../global/globalInit";
 
 const homeEnter = (page = document) => {
-  console.log("Home enter");
-
   const overlay = document.querySelector(".overlay");
   const h2wrappers = page.querySelectorAll(".h2-wrapper");
   const h2s = page.querySelectorAll(".h2-wrapper *");
@@ -25,6 +24,9 @@ const homeEnter = (page = document) => {
     display: "none",
     duration: 0.4,
     ease: "power2.inOut",
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.to(h2s, { y: "0rem", ease: "power2.inOut", duration: 0.4 });
   tl.to(secondCells, {
@@ -39,6 +41,9 @@ const homeEnter = (page = document) => {
     ease: "power2.inOut",
     stagger: 0.15,
     delay: -0.15,
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.set(h2wrappers, { overflow: "" });
   tl.set(overlay, {
@@ -60,6 +65,9 @@ const homeHeroEnter = (page = document) => {
     display: "none",
     duration: 0.5,
     ease: "power2.inOut",
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.to(hero, {
     opacity: 1,
@@ -83,6 +91,9 @@ const homeHeroEnter = (page = document) => {
     stagger: 0.1,
     ease: "power2.inOut",
     delay: -0.6,
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
 };
 

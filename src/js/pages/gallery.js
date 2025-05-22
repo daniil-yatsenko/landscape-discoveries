@@ -1,8 +1,7 @@
 import { gsap } from "gsap";
+import { lenisMain } from "../global/globalInit";
 
 const galleryEnter = (page = document) => {
-  console.log("Home enter");
-
   const overlay = document.querySelector(".overlay");
   const h2wrappers = page.querySelectorAll(".gallery_item-name");
   const h2s = page.querySelectorAll(".h2-wrapper");
@@ -12,8 +11,6 @@ const galleryEnter = (page = document) => {
   const numerings = page.querySelectorAll(".gallery_numbering-wrapper");
 
   let tl = gsap.timeline();
-
-  console.log(h2s);
 
   tl.set(h2wrappers, { overflow: "hidden" });
   tl.set(h2s, { y: "2rem" });
@@ -27,6 +24,9 @@ const galleryEnter = (page = document) => {
     display: "none",
     duration: 0.4,
     ease: "power2.inOut",
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.to(h2s, { y: "0rem", ease: "power2.inOut", duration: 0.4 });
   tl.to(descriptions, {
@@ -52,6 +52,9 @@ const galleryEnter = (page = document) => {
     duration: 0.8,
     ease: "power2.inOut",
     delay: -0.25,
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.set(h2wrappers, { overflow: "" });
   tl.set(overlay, {

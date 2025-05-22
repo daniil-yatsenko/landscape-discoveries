@@ -1,18 +1,8 @@
 import { gsap } from "gsap";
-
-// const aboutEnter = (page) => {
-//   let overlay = document.querySelector(".overlay");
-
-//   let tl = gsap.timeline();
-
-//   tl.to(overlay, { opacity: 0, display: "none" });
-//   tl.set(overlay, {
-//     opacity: "",
-//   });
-// };
+import { lenisMain } from "../global/globalInit";
 
 const aboutEnter = (page = document) => {
-  console.log("about enter");
+  ("about enter");
 
   const overlay = document.querySelector(".overlay");
   const h2wrappers = page.querySelectorAll(".h2-wrapper");
@@ -37,6 +27,9 @@ const aboutEnter = (page = document) => {
     display: "none",
     duration: 0.4,
     ease: "power2.inOut",
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.to(h2s, { y: "0rem", ease: "power2.inOut", duration: 0.4 });
   tl.to(contentCells, {
@@ -52,6 +45,9 @@ const aboutEnter = (page = document) => {
     ease: "power2.inOut",
     stagger: 0.15,
     delay: -0.2,
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.set(h2wrappers, { overflow: "" });
   tl.set(overlay, {

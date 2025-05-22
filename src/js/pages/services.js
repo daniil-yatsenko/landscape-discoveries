@@ -1,14 +1,13 @@
 import { gsap } from "gsap";
+import { lenisMain } from "../global/globalInit";
 
 const servicesEnter = (page = document) => {
-  console.log("Home enter");
-
   const overlay = document.querySelector(".overlay");
   const h2wrappers = page.querySelectorAll(".h2-wrapper");
   const h2s = page.querySelectorAll(".h2-wrapper *");
   const paragraphs = page.querySelectorAll(".paragraph-wrapper");
-  const imageWrappers = page.querySelectorAll(".services_image-wrapper");
-  const images = page.querySelectorAll(".services_image-wrapper *");
+  const imageWrappers = page.querySelectorAll(".splide_image-wrapper");
+  const images = page.querySelectorAll(".splide_image-wrapper *");
 
   let tl = gsap.timeline();
 
@@ -23,6 +22,9 @@ const servicesEnter = (page = document) => {
     display: "none",
     duration: 0.4,
     ease: "power2.inOut",
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.to(h2s, { y: "0rem", ease: "power2.inOut", duration: 0.4 });
   tl.to(paragraphs, {
@@ -38,6 +40,9 @@ const servicesEnter = (page = document) => {
     ease: "power2.inOut",
     stagger: 0.15,
     delay: -0.25,
+    onComplete: () => {
+      lenisMain.resize();
+    },
   });
   tl.set(h2wrappers, { overflow: "" });
   tl.set(overlay, {
