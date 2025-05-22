@@ -20,7 +20,13 @@ const defaultEnter = async (page) => {
   }
 
   tl.set(sections, { opacity: 0, y: "1rem" });
-  tl.to(overlay, { opacity: 0, display: "none" });
+  tl.to(overlay, {
+    opacity: 0,
+    display: "none",
+    onComplete: () => {
+      lenisMain.resize();
+    },
+  });
   tl.to(sections, {
     opacity: 1,
     y: "0rem",
